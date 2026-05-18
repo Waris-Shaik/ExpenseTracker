@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
+// @ts-ignore
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Expense Tracker",
   description: "Track your daily expenses with ease",
 };
 
-// ─── Root Layout ─────────────────────────────────────────────────────────────
-// Next.js App Router requires a root layout that wraps every page.
-// We add suppressHydrationWarning on <html> to silence the warning caused
-// by the dark/light class being set client-side.
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-gray-50 dark:bg-gray-950 min-h-screen font-sans antialiased">
-        {children}
+        <Navbar />
+        <main className="max-w-6xl mx-auto px-4 py-6">
+          {children}
+        </main>
       </body>
     </html>
   );
