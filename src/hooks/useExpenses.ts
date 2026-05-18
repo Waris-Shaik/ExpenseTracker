@@ -23,11 +23,11 @@ export function useExpenses() {
       if (stored) {
         setExpenses(JSON.parse(stored) as Expense[]);
       } else {
-        // First visit → load dummy data
-        setExpenses(DUMMY_EXPENSES);
+        // First visit → start empty, no dummy data
+        setExpenses([]);
       }
     } catch {
-      setExpenses(DUMMY_EXPENSES);
+      setExpenses([]);
     }
     setIsLoaded(true);
   }, []);
