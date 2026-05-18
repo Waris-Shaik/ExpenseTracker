@@ -1,0 +1,40 @@
+# ─── CI Workflow ─────────────────────────────────────────────────────────────
+# Runs on every push and pull-request to the main branch.
+# Steps: install → lint → build
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Install, Lint & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (version 20 LTS)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      # 3. Install all dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Run ESLint (Next.js built-in lint config)
+      - name: Run lint
+        run: npm run lint
+
+      # 5. Build the production bundle
+      - name: Build
+        run: npm run build
